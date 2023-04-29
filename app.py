@@ -1,7 +1,11 @@
+import os
+from dotenv import load_dotenv
 import json  
 from flask import Flask, render_template, request, jsonify  
 import openai  
 from openai.error import RateLimitError  
+
+load_dotenv()
   
 app = Flask(__name__)  
 openai.api_key = os.getenv("OPENAI_API_KEY")  
