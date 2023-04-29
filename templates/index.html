@@ -85,26 +85,47 @@
     </div>
 
     <script>
+      let messages = []; // Maintain a list of messages
+
+      function addMessageToResultDiv(role, content) {
+        let resultDiv = document.getElementById("result");
+        let messageDiv = document.createElement("div");
+        messageDiv.className = role;
+        messageDiv.textContent =
+          (role === "user" ? "USER" : "ASSISTANT") + ": " + content;
+        resultDiv.appendChild(messageDiv);
+      }
+
       window.onload = function () {
         document
           .getElementById("chat-form")
           .addEventListener("submit", function (event) {
-            // Prevent the form from submitting and refreshing the page
             event.preventDefault();
 
             let userInput = document.getElementById("user-input").value;
-            let url = `/gpt4?user_input=${encodeURIComponent(userInput)}`;
+            addMessageToResultDiv("user", userInput); // Display user message
+            let url = `/gpt4`;
 
-            fetch(url)
+            fetch(url, {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/x-www-form-urlencoded",
+              },
+              body: `user_input=${encodeURIComponent(
+                userInput
+              )}&messages=${encodeURIComponent(JSON.stringify(messages))}`,
+            })
               .then((response) => response.json())
               .then((data) => {
                 let content = data.content;
-                let resultDiv = document.getElementById("result");
-                resultDiv.innerHTML = content;
+                addMessageToResultDiv("assistant", content); // Display assistant response
+                messages.push({ role: "assistant", content: content }); // Update messages list
               })
               .catch((error) => {
                 console.error("Error fetching GPT-4 response:", error);
               });
+
+            document.getElementById("user-input").value = ""; // Clear input field
           });
       };
     </script>
