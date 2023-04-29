@@ -59,13 +59,34 @@
         background-color: #45a049;
       }
 
-      #result {
-        border: 1px solid #ccc;
+      .message {
+        display: inline-block;
         border-radius: 5px;
-        padding: 20px;
-        background-color: #f8f8f8;
-        min-height: 100px;
+        padding: 10px;
+        margin: 5px;
+        max-width: 75%;
         overflow-wrap: break-word;
+      }
+
+      .user-message {
+        background-color: #4caf50;
+        color: white;
+        float: right;
+        clear: both;
+      }
+
+      .assistant-message {
+        background-color: #f8f8f8;
+        color: #333;
+        float: left;
+        clear: both;
+      }
+
+      #chat-messages {
+        min-height: 100px;
+        overflow-y: auto;
+        width: 100%;
+        margin-bottom: 20px;
       }
     </style>
   </head>
@@ -81,19 +102,25 @@
         />
         <button type="submit" id="submitBtn">Send</button>
       </form>
-      <div id="result"></div>
+      <div id="chat-messages"></div>
     </div>
 
     <script>
       let messages = []; // Maintain a list of messages
 
       function addMessageToResultDiv(role, content) {
-        let resultDiv = document.getElementById("result");
+        let chatMessagesDiv = document.getElementById("chat-messages");
         let messageDiv = document.createElement("div");
-        messageDiv.className = role;
-        messageDiv.textContent =
-          (role === "user" ? "USER" : "ASSISTANT") + ": " + content;
-        resultDiv.appendChild(messageDiv);
+        messageDiv.className =
+          role === "user"
+            ? "message user-message"
+            : "message assistant-message";
+
+        let messageText = document.createElement("p");
+        messageText.textContent = content;
+        messageDiv.appendChild(messageText);
+
+        chatMessagesDiv.appendChild(messageDiv);
       }
 
       window.onload = function () {
