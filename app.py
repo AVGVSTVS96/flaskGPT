@@ -16,10 +16,11 @@ def index():
     return render_template('index.html')  
   
 @app.route('/gpt4', methods=['GET', 'POST'])  
-def gpt4():
-    user_input = request.args.get('user_input') if request.method == 'GET' else request.form['user_input']
-    messages = literal_eval(request.form['messages'])  # parse the messages list from the request
-    messages.append({"role": "user", "content": user_input})  # add the current user message to the messages list
+def gpt4():  
+    data = request.json
+    user_input = data.get('user_input')
+    messages = data.get('messages', [])
+    messages.append({"role": "user", "content": user_input})
 
     try:
         response = openai.ChatCompletion.create(
