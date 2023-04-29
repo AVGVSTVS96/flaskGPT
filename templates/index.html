@@ -84,7 +84,8 @@
 
       #chat-messages {
         min-height: 100px;
-        overflow-y: auto;
+        max-height: 300px;
+        overflow-y: scroll;
         width: 100%;
         margin-bottom: 20px;
       }
@@ -121,6 +122,12 @@
         messageDiv.appendChild(messageText);
 
         chatMessagesDiv.appendChild(messageDiv);
+        scrollToBottom();
+      }
+
+      function scrollToBottom() {
+        let chatMessagesDiv = document.getElementById("chat-messages");
+        chatMessagesDiv.scrollTop = chatMessagesDiv.scrollHeight;
       }
 
       window.onload = function () {
