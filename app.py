@@ -1,10 +1,8 @@
 import os
 from dotenv import load_dotenv
-import json  
 from flask import Flask, render_template, request, jsonify  
 import openai  
 from openai.error import RateLimitError  
-from ast import literal_eval
 
 load_dotenv()
   
