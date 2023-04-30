@@ -53,12 +53,13 @@
         padding: 10px 15px;
         margin-left: 10px;
         cursor: pointer;
-        transition: transform ease-out 0.2s;
+        transition: transform ease-out 0.2s, border-color 0.16s ease-in;
+        border: 3px solid hsl(0, 0%, 0%);
       }
 
       #submitBtn:hover {
-        background-color: hsl(0, 0%, 22%);
-        transform: scale(1.03);
+        border-color: hsl(218, 100%, 57%);
+        transform: scale(0.97);
       }
 
       .message {
