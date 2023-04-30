@@ -112,8 +112,9 @@
     </div>
 
     <script>
-      let messages = []; // Maintain a list of messages
-
+      let messages = [
+      { role: "system", content: "respond with only two words and two emojis" },
+];
       function addMessageToResultDiv(role, content) {
         let chatMessagesDiv = document.getElementById("chat-messages");
         let messageDiv = document.createElement("div");
