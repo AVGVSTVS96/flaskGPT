@@ -93,7 +93,6 @@
       .message p {
         margin: 0px;
       }
-
     </style>
   </head>
   <body>
@@ -113,8 +112,11 @@
 
     <script>
       let messages = [
-      { role: "system", content: "respond with only two words and two emojis" },
-];
+        {
+          role: "system",
+          content: "respond with only two words and two emojis",
+        },
+      ];
       function addMessageToResultDiv(role, content) {
         let chatMessagesDiv = document.getElementById("chat-messages");
         let messageDiv = document.createElement("div");
