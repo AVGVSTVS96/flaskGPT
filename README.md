@@ -8,10 +8,11 @@ As of now I have built a very basic interface with the help of GPT-4 and a tutor
 
 TODO:
 - [x] Add system role to steer AI behavior 
-- [ ] Move chat input to the bottom of the chatbox
-- [ ] Style the UI and chat bubbles with CSS
+- [x] Move chat input to the bottom of the chatbox
+- [ ] Style the UI with CSS
 - [ ] Add character streaming functionality
 - [ ] Add the ability to switch between GPT-3.5 and GPT-4
-- [ ] Add a system for saving chats and revisit them later
+- [ ] Add ability to save and revisit chats 
+- [ ] Add ability for users to edit system message from UI
 - [ ] Create tutorGPT prompt
-- [ ] Figure out how to get embeddings from websites and git repos 
+- [ ] Figure out how to get embeddings from recursively scraped websites, PDFs, and git repos 
