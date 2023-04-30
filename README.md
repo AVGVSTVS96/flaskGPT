@@ -14,3 +14,4 @@ TODO:
 - [ ] Add the ability to switch between GPT-3.5 and GPT-4
 - [ ] Add a system for saving chats and revisit them later
 - [ ] Create tutorGPT prompt
+- [ ] Figure out how to get embeddings from websites and git repos 
