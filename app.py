@@ -33,7 +33,8 @@ def process_chunks(concatenated_chunks):
 def generate(data):
     user_input = data.get('user_input')
     messages = data.get('messages', [])
-    messages = [{"role": "system", "content": "respond with only two words and two emojis"}] + messages
+    messages = [{"role": "system",
+                 "content": "respond with only two words and two emojis"}] + messages
     messages.append({"role": "user", "content": user_input})
 
     assistant_response = []
@@ -56,7 +57,6 @@ def generate(data):
     return jsonify(assistant_response)
 
 
-
 @app.route('/gpt4', methods=['POST'])
 def gpt4():
     data = request.json
@@ -75,8 +75,6 @@ def gpt4():
     processed_response = process_chunks(concatenated_chunks)
 
     return jsonify(processed_response)
-
-
 
 
 if __name__ == '__main__':
