@@ -116,7 +116,7 @@
 
     <script>
       let messages = [];
-
+  
       function addMessageToResultDiv(role, content) {
         let chatMessagesDiv = document.getElementById("chat-messages");
         let messageDiv = document.createElement("div");
@@ -124,32 +124,32 @@
           role === "user"
             ? "message user-message"
             : "message assistant-message";
-
+  
         let messageText = document.createElement("p");
         messageText.textContent = content;
         messageDiv.appendChild(messageText);
-
+  
         chatMessagesDiv.appendChild(messageDiv);
         scrollToBottom();
       }
-
+  
       function scrollToBottom() {
         let chatMessagesDiv = document.getElementById("chat-messages");
         chatMessagesDiv.scrollTop = chatMessagesDiv.scrollHeight;
       }
-
+  
       window.onload = function () {
         document
           .getElementById("chat-form")
           .addEventListener("submit", function (event) {
             event.preventDefault();
-
+  
             let userInput = document.getElementById("user-input").value;
             let url = `/gpt4`;
-
+  
             messages.push({ role: "user", content: userInput });
             addMessageToResultDiv("user", userInput, "user-input");
-
+  
             fetch(url, {
               method: "POST",
               headers: {
@@ -163,13 +163,16 @@
               .then(async (response) => {
                 const jsonResponse = await response.json();
                 let assistantResponse = "";
-
+  
                 jsonResponse.forEach((chunk) => {
                   if (chunk.content) {
                     assistantResponse += chunk.content;
                   }
                 });
-
+  
+                // Strip JSON objects, leaving only the text
+                assistantResponse = assistantResponse.replace(/({\s*"content":\s*"|"\s*}|{\s*"role":\s*"assistant"\s*}|{\s*})/g, "");
+  
                 addMessageToResultDiv(
                   "assistant",
                   assistantResponse,
