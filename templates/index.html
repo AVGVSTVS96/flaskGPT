@@ -170,11 +170,6 @@
                   }
                 });
 
-                // Strip JSON objects, leaving only the text
-                assistantResponse = assistantResponse.replace(
-                  /({\s*"content":\s*"|"\s*}|{\s*"role":\s*"assistant"\s*}|{\s*})/g,
-                  ""
-                );
 
                 addMessageToResultDiv(
                   "assistant",
