@@ -189,6 +189,8 @@
               .catch((error) => {
                 console.error("Error fetching GPT-4 response:", error);
               });
+            // Clear the user input field
+            document.getElementById("user-input").value = "";
           });
       };
     </script>
