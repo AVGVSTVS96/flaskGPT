@@ -37,7 +37,8 @@ def generate(data):
                 assistant_response.append({"content": str(content)})
 
     except RateLimitError:
-        assistant_response.append({"content": "The server is experiencing a high volume of requests. Please try again later."})
+        assistant_response.append(
+            {"content": "The server is experiencing a high volume of requests. Please try again later."})
 
     return jsonify(assistant_response)
 
