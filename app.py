@@ -25,7 +25,7 @@ def generate(data):
 
     try:
         response = openai.ChatCompletion.create(
-            model="gpt-4",
+            model="gpt-3.5-turbo",
             messages=messages,
             stream=True
         )
