@@ -18,6 +18,7 @@ def index():
 def generate(data):
     user_input = data.get('user_input')
     messages = data.get('messages', [])
+    messages = [{"role": "system", "content": "respond with only two words and two emojis"}] + messages
     messages.append({"role": "user", "content": user_input})
 
     assistant_response = []
