@@ -1,3 +1,4 @@
+import re
 import os
 from dotenv import load_dotenv
 from flask import Flask, render_template, request, jsonify, Response, json
@@ -14,6 +15,18 @@ openai.api_key = os.getenv("OPENAI_API_KEY")
 def index():
     return render_template('index.html')
 
+def process_chunks(concatenated_chunks):
+    # Remove unnecessary strings and extract only the JSON objects
+    json_objects = re.findall(r'{\s*"content":\s*"[^"]*"\s*}', concatenated_chunks)
+
+    # Parse the JSON objects and create a list of assistant responses
+    assistant_responses = []
+    for obj_str in json_objects:
+        obj = json.loads(obj_str)
+        assistant_responses.append({"content": obj["content"]})
+
+    return assistant_responses
+
 
 def generate(data):
     user_input = data.get('user_input')
@@ -22,6 +35,7 @@ def generate(data):
     messages.append({"role": "user", "content": user_input})
 
     assistant_response = []
+    current_chunk = ""
 
     try:
         response = openai.ChatCompletion.create(
@@ -33,9 +47,17 @@ def generate(data):
         for chunk in response:
             content = chunk['choices'][0]['delta']
             if isinstance(content, str):
-                assistant_response.append({"content": content})
+                current_chunk += content
             else:
-                assistant_response.append({"content": str(content)})
+                current_chunk += str(content)
+
+            # Check if the current chunk is a complete JSON object
+            try:
+                json.loads(current_chunk)
+                assistant_response.append({"content": current_chunk})
+                current_chunk = ""
+            except json.JSONDecodeError:
+                pass
 
     except RateLimitError:
         assistant_response.append(
@@ -48,7 +70,17 @@ def generate(data):
 def gpt4():
     data = request.json
     assistant_response = generate(data)
-    return assistant_response
+
+    # Concatenate the chunks
+    concatenated_chunks = ""
+    for chunk in assistant_response.json:
+        concatenated_chunks += chunk.get("content", "")
+
+    # Now process the concatenated chunks
+    processed_response = process_chunks(concatenated_chunks)
+
+    return jsonify(processed_response)
+
 
 
 if __name__ == '__main__':
