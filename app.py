@@ -15,9 +15,11 @@ openai.api_key = os.getenv("OPENAI_API_KEY")
 def index():
     return render_template('index.html')
 
+
 def process_chunks(concatenated_chunks):
     # Remove unnecessary strings and extract only the JSON objects
-    json_objects = re.findall(r'{\s*"content":\s*"[^"]*"\s*}', concatenated_chunks)
+    json_objects = re.findall(
+        r'{\s*"content":\s*"[^"]*"\s*}', concatenated_chunks)
 
     # Parse the JSON objects and create a list of assistant responses
     assistant_responses = []
@@ -31,7 +33,8 @@ def process_chunks(concatenated_chunks):
 def generate(data):
     user_input = data.get('user_input')
     messages = data.get('messages', [])
-    messages = [{"role": "system", "content": "respond with only two words and two emojis"}] + messages
+    messages = [{"role": "system",
+                 "content": "respond with only two words and two emojis"}] + messages
     messages.append({"role": "user", "content": user_input})
 
     assistant_response = []
@@ -80,7 +83,6 @@ def gpt4():
     processed_response = process_chunks(concatenated_chunks)
 
     return jsonify(processed_response)
-
 
 
 if __name__ == '__main__':
