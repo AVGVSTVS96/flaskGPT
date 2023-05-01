@@ -126,7 +126,7 @@
             : "message assistant-message";
 
         let messageText = document.createElement("p");
-        messageText.textContent = content;
+        messageText.textContent = unescape(content.replace(/\\u/g, "%u"));
         messageDiv.appendChild(messageText);
 
         chatMessagesDiv.appendChild(messageDiv);
