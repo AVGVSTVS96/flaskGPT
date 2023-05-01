@@ -147,9 +147,8 @@
             let userInput = document.getElementById("user-input").value;
             let url = `/gpt4`;
 
-            // Add the user's message to the messages array and display it on the screen
             messages.push({ role: "user", content: userInput });
-            addMessageToResultDiv("user", userInput);
+            addMessageToResultDiv("user", userInput, "user-input");
 
             fetch(url, {
               method: "POST",
@@ -162,16 +161,23 @@
               }),
             })
               .then(async (response) => {
-                const jsonResponse = await response.json(); // Add this line to parse the JSON response
+                const jsonResponse = await response.json();
+                let assistantResponse = "";
 
                 jsonResponse.forEach((chunk) => {
                   if (chunk.content) {
-                    addMessageToResultDiv("assistant", chunk.content);
-                    messages.push({
-                      role: "assistant",
-                      content: chunk.content,
-                    });
+                    assistantResponse += chunk.content;
                   }
+                });
+
+                addMessageToResultDiv(
+                  "assistant",
+                  assistantResponse,
+                  "assistant-response"
+                );
+                messages.push({
+                  role: "assistant",
+                  content: assistantResponse,
                 });
               })
               .catch((error) => {
