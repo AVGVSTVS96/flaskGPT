@@ -14,7 +14,7 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        height: 100vh;
+        min-height: 100vh;
         margin: 0;
       }
 
@@ -25,16 +25,27 @@
         width: 80%;
         max-width: 900px;
         box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
-        max-height: 80vh;
         display: flex;
         flex-direction: column;
+        min-height: 200px;
+        max-height: 80vh;
+      }
+      
+      .chat-wrapper {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        overflow-y: auto;
       }
 
-      h1 {
-        text-align: center;
+      #chat-messages {
+        flex-grow: 1;
+        overflow-y: auto;
+        width: 100%;
         margin-bottom: 20px;
+        min-height: 100px;
       }
-
+      
       #chat-form {
         display: flex;
         justify-content: space-between;
@@ -47,6 +58,11 @@
         border-radius: 5px;
         padding: 10px;
         min-width: 70px;
+      }
+
+      h1 {
+        text-align: center;
+        margin-bottom: 20px;
       }
 
       #submitBtn {
@@ -89,32 +105,27 @@
         clear: both;
       }
 
-      #chat-messages {
-        min-height: 100px;
-        max-height: 300px;
-        overflow-y: scroll;
-        width: 100%;
-        margin-bottom: 20px;
-      }
-
       .message p {
         margin: 0px;
       }
+
     </style>
   </head>
   <body>
     <div class="chat-container">
       <h1>GPT-4 API Testing</h1>
-      <div id="chat-messages"></div>
-      <form id="chat-form">
-        <input
-          type="text"
-          id="user-input"
-          name="user_input"
-          placeholder="Type your message..."
-        />
-        <button type="submit" id="submitBtn">Send</button>
-      </form>
+      <div class="chat-wrapper">
+        <div id="chat-messages"></div>
+        <form id="chat-form">
+          <input
+            type="text"
+            id="user-input"
+            name="user_input"
+            placeholder="Type your message..."
+          />
+          <button type="submit" id="submitBtn">Send</button>
+        </form>
+      </div>
     </div>
 
     <script>
@@ -172,7 +183,6 @@
                     assistantResponse += chunk.content;
                   }
                 });
-
 
                 addMessageToResultDiv(
                   "assistant",
