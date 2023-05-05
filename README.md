@@ -1,6 +1,6 @@
 # flaskGPT
 
-flaskGPT is a GPT-3.5/4 we app build with Flask and OpenAI's API.
+flaskGPT is a GPT-3.5/4 web app build with Flask and OpenAI's API.
 
 It will be a customizable platform with a tutor mode that helps users solve problems without giving them the solutions. Instead flaskGPT will provide hints and education in the topics needed for the user to figure out the problems on their own.
 
