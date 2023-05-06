@@ -1,7 +1,7 @@
 let messages = [];
 
-  // Create element, append it to the message div, and add message content to it
-  function addMessageToResultDiv(role, content) {
+// Create element, append it to the message div, and add message content to it
+function addMessageToResultDiv(role, content) {
   let chatMessagesDiv = document.getElementById("chat-messages");
   let messageDiv = document.createElement("div");
   messageDiv.className =
@@ -27,50 +27,43 @@ window.onload = function () {
       event.preventDefault();
 
       let userInput = document.getElementById("user-input").value;
-      let url = `/gpt4`;
+      let url = `/gpt4?user_input=${encodeURIComponent(
+        userInput
+      )}&messages=${encodeURIComponent(JSON.stringify(messages))}`;
 
       messages.push({ role: "user", content: userInput });
       addMessageToResultDiv("user", userInput, "user-input");
 
-      // Make a POST request to the GPT-4 API endpoint with the user's input and messages array
-      fetch(url, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          user_input: userInput,
-          messages: messages,
-        }),
-      })
-        // Get the JSON response from the API
-        .then(async (response) => {
-          const jsonResponse = await response.json();
-          let assistantResponse = "";
+      // Create a new message container for the assistant's response
+      let chatMessagesDiv = document.getElementById("chat-messages");
+      let messageDiv = document.createElement("div");
+      messageDiv.className = "message assistant-message";
+      let messageText = document.createElement("p");
+      messageDiv.appendChild(messageText);
+      chatMessagesDiv.appendChild(messageDiv);
+      scrollToBottom();
 
-          // Concatenate the content of each chunk in the JSON response
-          jsonResponse.forEach((chunk) => {
-            if (chunk.content) {
-              assistantResponse += chunk.content;
-            }
-          });
+      let source = new EventSource(url);
 
-          // Add the assistant's response to the chat-messages div
-          addMessageToResultDiv(
-            "assistant",
-            assistantResponse,
-            "assistant-response"
-          );
-
-          // Add the assistant's response to the messages array
+      source.onmessage = function (event) {
+        if (event.data === "[DONE]") {
+          source.close();
           messages.push({
             role: "assistant",
-            content: assistantResponse,
+            content: messageText.textContent,
           });
-        })
-        .catch((error) => {
-          console.error("Error fetching GPT-4 response:", error);
-        });
+        } else {
+          // Append the chunk to the current assistant message container
+          messageText.textContent += event.data;
+          scrollToBottom();
+        }
+      };
+
+      source.onerror = function (event) {
+        source.close();
+        console.error("Error fetching GPT-4 response:", event);
+      };
+
       // Clear the user input field
       document.getElementById("user-input").value = "";
     });
