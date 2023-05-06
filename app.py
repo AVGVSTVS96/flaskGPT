@@ -1,4 +1,3 @@
-import re
 import os
 from dotenv import load_dotenv
 from flask import Flask, render_template, request, jsonify
@@ -16,7 +15,7 @@ def index():
     return render_template('index.html')
 
 
-def generate(user_input, messages):
+def generate(messages):
     assistant_response = []
 
     try:
@@ -47,7 +46,7 @@ def gpt4():
                  "content": "respond with only two words and two emojis"}] + messages
     messages.append({"role": "user", "content": user_input})
 
-    assistant_response = generate(user_input, messages)
+    assistant_response = generate(messages)
     return jsonify(assistant_response)
 
 
