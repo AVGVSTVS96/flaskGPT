@@ -1,13 +1,12 @@
 let messages = [];
 
-// Create and append a message element to the chat-messages div
-function addMessageToResultDiv(role, content) {
+  // Create element, append it to the message div, and add message content to it
+  function addMessageToResultDiv(role, content) {
   let chatMessagesDiv = document.getElementById("chat-messages");
   let messageDiv = document.createElement("div");
   messageDiv.className =
     role === "user" ? "message user-message" : "message assistant-message";
 
-  // Create element, append it to the message div, and add message content to it
   let messageText = document.createElement("p");
   messageText.textContent = content;
   messageDiv.appendChild(messageText);
