@@ -9,7 +9,7 @@ function addMessageToResultDiv(role, content) {
       : "message assistant-message";
 
   let messageText = document.createElement("p");
-  messageText.textContent = unescape(content.replace(/\\u/g, "%u"));
+  messageText.textContent = content;
   messageDiv.appendChild(messageText);
 
   chatMessagesDiv.appendChild(messageDiv);
