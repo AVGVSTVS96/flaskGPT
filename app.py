@@ -30,23 +30,30 @@ def generate(messages):
             for chunk in response:
                 content = chunk['choices'][0]['delta'].get('content', '')
                 if content:
-                    yield f'data: {content}\n\n'
+                    yield content
                     assistant_response.append({"content": content})
 
         except RateLimitError:
             assistant_response.append(
                 {"content": "The server is experiencing a high volume of requests. Please try again later."})
-            yield f'data: {assistant_response[-1]["content"]}\n\n'
+            yield assistant_response[-1]["content"]
 
-        yield 'data: [DONE]\n\n'
+        yield '[DONE]'
 
     return stream()
 
 
-@app.route('/gpt4', methods=['GET'])
+# <-- Change this line to allow POST requests
+@app.route('/gpt4', methods=['GET', 'POST'])
 def gpt4():
-    user_input = request.args.get('user_input')
-    messages = json.loads(request.args.get('messages', '[]'))
+    if request.method == 'POST':
+        data = request.get_json()
+        user_input = data.get('user_input')
+        messages = data.get('messages', [])
+    else:
+        user_input = request.args.get('user_input')
+        messages = json.loads(request.args.get('messages', '[]'))
+
     messages = [{"role": "system",
                  "content": "respond with only two words and two emojis"}] + messages
     messages.append({"role": "user", "content": user_input})

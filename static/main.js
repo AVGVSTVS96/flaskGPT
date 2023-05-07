@@ -1,6 +1,5 @@
 let messages = [];
 
-// Create element, append it to the message div, and add message content to it
 function addMessageToResultDiv(role, content) {
   let chatMessagesDiv = document.getElementById("chat-messages");
   let messageDiv = document.createElement("div");
@@ -20,21 +19,38 @@ function scrollToBottom() {
   chatMessagesDiv.scrollTop = chatMessagesDiv.scrollHeight;
 }
 
+async function handleResponse(response, messageText) {
+  const reader = response.body.getReader();
+  const decoder = new TextDecoder("utf-8");
+
+  while (true) {
+    const { value, done } = await reader.read();
+    if (done) break;
+
+    const text = decoder.decode(value);
+    if (text === "[DONE]") {
+      messages.push({
+        role: "assistant",
+        content: messageText.textContent,
+      });
+    } else {
+      messageText.textContent += text;
+      scrollToBottom();
+    }
+  }
+}
+
 window.onload = function () {
   document
     .getElementById("chat-form")
-    .addEventListener("submit", function (event) {
+    .addEventListener("submit", async function (event) {
       event.preventDefault();
 
       let userInput = document.getElementById("user-input").value;
-      let url = `/gpt4?user_input=${encodeURIComponent(
-        userInput
-      )}&messages=${encodeURIComponent(JSON.stringify(messages))}`;
 
       messages.push({ role: "user", content: userInput });
       addMessageToResultDiv("user", userInput, "user-input");
 
-      // Create a new message container for the assistant's response
       let chatMessagesDiv = document.getElementById("chat-messages");
       let messageDiv = document.createElement("div");
       messageDiv.className = "message assistant-message";
@@ -43,28 +59,19 @@ window.onload = function () {
       chatMessagesDiv.appendChild(messageDiv);
       scrollToBottom();
 
-      let source = new EventSource(url);
+      const response = await fetch("/gpt4", {
+        method: "POST",
+        body: JSON.stringify({
+          user_input: userInput,
+          messages: messages,
+        }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
 
-      source.onmessage = function (event) {
-        if (event.data === "[DONE]") {
-          source.close();
-          messages.push({
-            role: "assistant",
-            content: messageText.textContent,
-          });
-        } else {
-          // Append the chunk to the current assistant message container
-          messageText.textContent += event.data;
-          scrollToBottom();
-        }
-      };
+      handleResponse(response, messageText);
 
-      source.onerror = function (event) {
-        source.close();
-        console.error("Error fetching GPT-4 response:", event);
-      };
-
-      // Clear the user input field
       document.getElementById("user-input").value = "";
     });
 };
