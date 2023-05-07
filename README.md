@@ -3,7 +3,7 @@
 flaskGPT is a GPT-3.5/4 web app build with Flask and OpenAI's API.
 
 This branch makes several changes to switch from the URL query parameter
-method in the URLstreaming branch to the new method that uses Server-Sent Events (SSE)
+method in the urlStreaming branch to the new method that uses Server-Sent Events (SSE)
 with POST requests:
 
 1. Modify Flask route for /gpt4 endpoint to accept POST requests:
@@ -27,7 +27,7 @@ with POST requests:
      model's response.
    - Extract the actual content from the response data string.
 
-These changes transition the project from the urlstreaming method to the more
+These changes transition the project from the urlStreaming method to the more
 efficient and secure streamingSSE method for sending user input and message
 history to the server and receiving the GPT model's output.
 
