@@ -4,18 +4,23 @@ let autoScroll = true;
 const chatMessagesDiv = document.getElementById("chat-messages");
 const userInputElem = document.getElementById("user-input");
 
+window.renderMarkdown = function (content) {
+  const md = new markdownit();
+  return md.render(content);
+};
+
 function addMessageToResultDiv(role, content) {
   let messageDiv = document.createElement("div");
   messageDiv.className =
     role === "user" ? "message user-message" : "message assistant-message";
-
-  let messageText = document.createElement("p");
-  messageText.textContent = content;
-  messageDiv.appendChild(messageText);
+  
+  let renderedContent = window.renderMarkdown(content).trim();  
+  messageDiv.innerHTML = renderedContent;
 
   chatMessagesDiv.appendChild(messageDiv);
   scrollToBottom();
 }
+
 
 function scrollToBottom() {
   if (autoScroll) {
@@ -33,25 +38,28 @@ document
     autoScroll = isAtBottom;
   });
 
-async function handleResponse(response, messageText) {
-  const reader = response.body.getReader();
-  const decoder = new TextDecoder("utf-8");
-
-  while (true) {
-    const { value, done } = await reader.read();
-    if (done) {
-      messages.push({
-        role: "assistant",
-        content: messageText.textContent,
-      });
-      break;
+  async function handleResponse(response, messageText) {
+    const reader = response.body.getReader();
+    const decoder = new TextDecoder("utf-8");
+    let assistantMessage = "";
+  
+    while (true) {
+      const { value, done } = await reader.read();
+      if (done) {
+        messages.push({
+          role: "assistant",
+          content: assistantMessage,
+        });
+        break;
+      }
+  
+      const text = decoder.decode(value);
+      assistantMessage += text;
+      messageText.innerHTML = window.renderMarkdown(assistantMessage).trim(); // Render the markdown content as HTML using 'markdown-it' library while streaming
+      scrollToBottom();
     }
-
-    const text = decoder.decode(value);
-    messageText.textContent += text;
-    scrollToBottom();
   }
-}
+  
 
 window.onload = function () {
   document

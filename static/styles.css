@@ -106,7 +106,6 @@ h1 {
   padding: 10px;
   border-radius: 5px;
   overflow-wrap: break-word;
-  white-space: pre-wrap;
 }
 
 .user-message {
@@ -123,6 +122,6 @@ h1 {
   clear: both;
 }
 
-.message p {
+.message * {
   margin: 0px;
 }
