@@ -1,26 +1,33 @@
 body {
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-  color: hsl(240, 76%, 87%);
-  background-color: hsl(240, 38%, 15%);
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 100vh;
+  height: 100dvh;
   margin: 0;
+
+  /* background-color: hsl(240, 45%, 10%); */
+  background: radial-gradient(hsl(229, 25%, 20%), transparent 10%),
+    hsl(240, 45%, 9%);
+  background-position: 0% 0%;
+  background-size: 7vmin 7vmin;
+
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  color: hsl(240, 76%, 87%);
 }
 
 .chat-container {
-  background-color: hsl(240, 38%, 13%);
-  border: 2.5px solid hsl(237, 22%, 34%);
-  border-radius: 15px;
-  padding: 20px;
-  width: 80%;
-  max-width: 900px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
   display: flex;
   flex-direction: column;
-  min-height: 200px;
   max-height: 80vh;
+  min-height: 200px;
+  max-width: 900px;
+  width: 80%;
+  padding: 20px;
+  border-radius: 15px;
+
+  background-color: hsl(240, 38%, 13%);
+  border: 2.5px solid hsl(237, 22%, 34%);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
 }
 
 .chat-wrapper {
@@ -32,10 +39,10 @@ body {
 
 #chat-messages {
   flex-grow: 1;
-  overflow-y: auto;
   width: 100%;
-  margin-bottom: 20px;
   min-height: 100px;
+  margin-bottom: 20px;
+  overflow-y: auto;
 }
 
 #chat-form {
@@ -46,13 +53,23 @@ body {
 
 #user-input {
   flex-grow: 1;
-  background-color: hsl(240, 40%, 80%);
-  color: hsl(240, 25%, 25%);
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  padding: 10px;
   min-width: 70px;
+  border-radius: 5px;
   margin-left: 5px;
+  padding: 10px;
+  border: 0px;
+  background-color: hsl(240, 39%, 80%);
+  color: hsl(240, 25%, 25%);
+}
+
+#user-input:hover {
+  box-shadow: inset 0px 0px 16px 3px hsla(245, 40%, 15%, 0.28);
+}
+
+#user-input:focus {
+  outline: none;
+  background-color: hsl(240, 30%, 75%);
+  box-shadow: inset 0px 0px 16px 3px hsla(245, 40%, 15%, 0.28);
 }
 
 h1 {
@@ -61,8 +78,9 @@ h1 {
 }
 
 #submitBtn {
-  background-color: hsl(240, 40%, 55%);
+  background-color: hsl(240, 45%, 55%);
   color: hsl(240, 76%, 90%);
+
   border: none;
   border-radius: 5px;
   padding: 10px 15px;
@@ -79,10 +97,10 @@ h1 {
 
 .message {
   display: inline-block;
-  border-radius: 5px;
-  padding: 10px;
-  margin: 5px;
   max-width: 70%;
+  margin: 5px;
+  padding: 10px;
+  border-radius: 5px;
   overflow-wrap: break-word;
 }
 
