@@ -1,8 +1,10 @@
 let messages = [];
 let autoScroll = true;
 
+const chatMessagesDiv = document.getElementById("chat-messages");
+const userInputElem = document.getElementById("user-input");
+
 function addMessageToResultDiv(role, content) {
-  let chatMessagesDiv = document.getElementById("chat-messages");
   let messageDiv = document.createElement("div");
   messageDiv.className =
     role === "user" ? "message user-message" : "message assistant-message";
@@ -16,22 +18,20 @@ function addMessageToResultDiv(role, content) {
 }
 
 function scrollToBottom() {
-  let chatMessagesDiv = document.getElementById("chat-messages");
   if (autoScroll) {
     chatMessagesDiv.scrollTop = chatMessagesDiv.scrollHeight;
   }
 }
 
-// New event listener to detect when the user starts scrolling up to disable auto-scroll
-document.getElementById("chat-messages").addEventListener("scroll", function () {
-  let chatMessagesDiv = document.getElementById("chat-messages");
-  const isAtBottom =
-    chatMessagesDiv.scrollHeight - chatMessagesDiv.clientHeight <=
-    chatMessagesDiv.scrollTop + 1;
+document
+  .getElementById("chat-messages")
+  .addEventListener("scroll", function () {
+    const isAtBottom =
+      chatMessagesDiv.scrollHeight - chatMessagesDiv.clientHeight <=
+      chatMessagesDiv.scrollTop + 1;
 
-  autoScroll = isAtBottom;
-});
-
+    autoScroll = isAtBottom;
+  });
 
 async function handleResponse(response, messageText) {
   const reader = response.body.getReader();
@@ -53,19 +53,17 @@ async function handleResponse(response, messageText) {
   }
 }
 
-
 window.onload = function () {
   document
     .getElementById("chat-form")
     .addEventListener("submit", async function (event) {
       event.preventDefault();
 
-      let userInput = document.getElementById("user-input").value;
+      let userInput = userInputElem.value;
 
       messages.push({ role: "user", content: userInput });
       addMessageToResultDiv("user", userInput, "user-input");
 
-      let chatMessagesDiv = document.getElementById("chat-messages");
       let messageDiv = document.createElement("div");
       messageDiv.className = "message assistant-message";
       let messageText = document.createElement("p");
@@ -86,6 +84,6 @@ window.onload = function () {
 
       handleResponse(response, messageText);
 
-      document.getElementById("user-input").value = "";
+      userInputElem.value = "";
     });
 };
