@@ -30,8 +30,6 @@ def generate(messages):
         except RateLimitError:
             yield "The server is experiencing a high volume of requests. Please try again later."
 
-        yield '[DONE]'
-
     return stream()
 
 @app.route('/gpt4', methods=['POST'])

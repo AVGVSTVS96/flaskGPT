@@ -25,20 +25,20 @@ async function handleResponse(response, messageText) {
 
   while (true) {
     const { value, done } = await reader.read();
-    if (done) break;
-
-    const text = decoder.decode(value);
-    if (text === "[DONE]") {
+    if (done) {
       messages.push({
         role: "assistant",
         content: messageText.textContent,
       });
-    } else {
-      messageText.textContent += text;
-      scrollToBottom();
+      break;
     }
+
+    const text = decoder.decode(value);
+    messageText.textContent += text;
+    scrollToBottom();
   }
 }
+
 
 window.onload = function () {
   document
