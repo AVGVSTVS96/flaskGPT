@@ -1,4 +1,5 @@
 let messages = [];
+let autoScroll = true;
 
 function addMessageToResultDiv(role, content) {
   let chatMessagesDiv = document.getElementById("chat-messages");
@@ -16,8 +17,21 @@ function addMessageToResultDiv(role, content) {
 
 function scrollToBottom() {
   let chatMessagesDiv = document.getElementById("chat-messages");
-  chatMessagesDiv.scrollTop = chatMessagesDiv.scrollHeight;
+  if (autoScroll) {
+    chatMessagesDiv.scrollTop = chatMessagesDiv.scrollHeight;
+  }
 }
+
+// New event listener to detect when the user starts scrolling up to disable auto-scroll
+document.getElementById("chat-messages").addEventListener("scroll", function () {
+  let chatMessagesDiv = document.getElementById("chat-messages");
+  const isAtBottom =
+    chatMessagesDiv.scrollHeight - chatMessagesDiv.clientHeight <=
+    chatMessagesDiv.scrollTop + 1;
+
+  autoScroll = isAtBottom;
+});
+
 
 async function handleResponse(response, messageText) {
   const reader = response.body.getReader();
