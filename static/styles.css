@@ -62,14 +62,9 @@ body {
   color: hsl(240, 25%, 25%);
 }
 
-#user-input:hover {
-  box-shadow: inset 0px 0px 16px 3px hsla(245, 40%, 15%, 0.28);
-}
-
 #user-input:focus {
   outline: none;
-  background-color: hsl(240, 30%, 75%);
-  box-shadow: inset 0px 0px 16px 3px hsla(245, 40%, 15%, 0.28);
+  box-shadow: inset 0px 0px 16px 2px hsla(245, 90%, 15%, 0.28);
 }
 
 h1 {
