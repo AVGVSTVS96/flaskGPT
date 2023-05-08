@@ -47,6 +47,7 @@ body {
 #user-input {
   flex-grow: 1;
   background-color: hsl(240, 40%, 80%);
+  color: hsl(240, 25%, 25%);
   border: 1px solid #ccc;
   border-radius: 5px;
   padding: 10px;
