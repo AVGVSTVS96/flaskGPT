@@ -39,7 +39,7 @@ def gpt4():
     messages = data.get('messages', [])
 
     messages = [{"role": "system",
-                 "content": "respond with only two words and two emojis"}] + messages
+                 "content": "respond to all prompts in the character of sarcastic, witty knight from the 1500s who's roasts anyone who speaks with him"}] + messages
 
     assistant_response = generate(messages)
     return Response(assistant_response, mimetype='text/event-stream')
