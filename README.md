@@ -1,18 +1,29 @@
 # flaskGPT
 
-flaskGPT is a GPT-3.5/4 web app build with Flask and OpenAI's API.
+flaskGPT a customizable, open source GPT-3.5/4 chat app built with Flask and OpenAI's API. It implements several features essential to providing an excellent user experience, with a simple frontend UI built with HTML, CSS, and JavaScript
 
-## **Issues**
-- [ ] Fix chat-container scrolling
 
-### **Enhancements**
+## Features
+- Chat with the GPT-3.5 & GPT-4 models
+- Full conversation history functionality
+- Character streaming response functionality
+- Markdown support in user and assistant messages
+- Automatic scrolling, can be cancelled by scrolling up 
+
+# **Tasks**
+## **Enhancements**
+- [ ] Hide chatbox scrollbar
+- [ ] Update chatbox height limits to stop second scrollbar when page is vertically compressed
+- [ ] Add syntax highlighting to Markdown code blocks
+- [ ] Add CSS styling for code blocks
 - [ ] Add line wrap to user-input box so it expands with text
 - [ ] Add ability for users to edit system message from UI
 - [ ] Add the ability to switch between GPT-3.5 and GPT-4
 
 
-### **Completed**
+## **Completed**
 - [x] Correctly implement character streaming functionality
+- [x] Add Markdown support
 - [x] Add system role to steer AI behavior 
 - [x] Separate HTML, CSS and JS into their own files
 - [x] Style the UI with CSS
