@@ -13,14 +13,13 @@ function addMessageToResultDiv(role, content) {
   let messageDiv = document.createElement("div");
   messageDiv.className =
     role === "user" ? "message user-message" : "message assistant-message";
-  
-  let renderedContent = window.renderMarkdown(content).trim();  
+
+  let renderedContent = window.renderMarkdown(content).trim();
   messageDiv.innerHTML = renderedContent;
 
   chatMessagesDiv.appendChild(messageDiv);
   scrollToBottom();
 }
-
 
 function scrollToBottom() {
   if (autoScroll) {
@@ -28,38 +27,36 @@ function scrollToBottom() {
   }
 }
 
-document
-  .getElementById("chat-messages")
-  .addEventListener("scroll", function () {
-    const isAtBottom =
-      chatMessagesDiv.scrollHeight - chatMessagesDiv.clientHeight <=
-      chatMessagesDiv.scrollTop + 1;
+document;
+chatMessagesDiv.addEventListener("scroll", function () {
+  const isAtBottom =
+    chatMessagesDiv.scrollHeight - chatMessagesDiv.clientHeight <=
+    chatMessagesDiv.scrollTop + 1;
 
-    autoScroll = isAtBottom;
-  });
+  autoScroll = isAtBottom;
+});
 
-  async function handleResponse(response, messageText) {
-    const reader = response.body.getReader();
-    const decoder = new TextDecoder("utf-8");
-    let assistantMessage = "";
-  
-    while (true) {
-      const { value, done } = await reader.read();
-      if (done) {
-        messages.push({
-          role: "assistant",
-          content: assistantMessage,
-        });
-        break;
-      }
-  
-      const text = decoder.decode(value);
-      assistantMessage += text;
-      messageText.innerHTML = window.renderMarkdown(assistantMessage).trim(); // Render the markdown content as HTML using 'markdown-it' library while streaming
-      scrollToBottom();
+async function handleResponse(response, messageText) {
+  const reader = response.body.getReader();
+  const decoder = new TextDecoder("utf-8");
+  let assistantMessage = "";
+
+  while (true) {
+    const { value, done } = await reader.read();
+    if (done) {
+      messages.push({
+        role: "assistant",
+        content: assistantMessage,
+      });
+      break;
     }
+
+    const text = decoder.decode(value);
+    assistantMessage += text;
+    messageText.innerHTML = window.renderMarkdown(assistantMessage).trim(); // Render the markdown content as HTML using 'markdown-it' library while streaming
+    scrollToBottom();
   }
-  
+}
 
 window.onload = function () {
   document
