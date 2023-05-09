@@ -40,7 +40,6 @@ def gpt4():
 
     messages = [{"role": "system",
                  "content": "respond with only two words and two emojis"}] + messages
-    messages.append({"role": "user", "content": user_input})
 
     assistant_response = generate(messages)
     return Response(assistant_response, mimetype='text/event-stream')
