@@ -71,11 +71,10 @@ h1 {
   text-align: left;
   margin-left: 1em;
   margin-bottom: 20px;
-  background: #02bcfe;
   background: linear-gradient(
     to right,
-    hsl(193, 100%, 62%) 0%,
-    hsl(269, 100%, 62%) 30%
+    hsl(280, 80%, 58%) -10%,
+    hsl(210, 100%, 55%) 60%
   );
   background-clip: text;
   -webkit-text-fill-color: transparent;
