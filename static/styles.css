@@ -2,6 +2,10 @@ html {
   scrollbar-color: hsla(0, 0%, 46%, 0.5) transparent;
 }
 
+::-webkit-scrollbar {
+  display: none;
+}
+
 body {
   display: flex;
   justify-content: center;
