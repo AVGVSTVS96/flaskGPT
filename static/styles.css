@@ -1,3 +1,7 @@
+html {
+  scrollbar-color: hsla(0, 0%, 46%, 0.5) transparent;
+}
+
 body {
   display: flex;
   justify-content: center;
@@ -5,12 +9,43 @@ body {
   height: 100dvh;
   margin: 0;
 
-  /* background-color: hsl(240, 45%, 10%); */
-  background: radial-gradient(hsl(229, 25%, 20%), transparent 10%),
-    hsl(240, 45%, 9%);
+  /* background-color: hsl(240, 45%, 9%); */
   background-position: 0% 0%;
   background-size: 7vmin 7vmin;
-
+  background: linear-gradient(
+      149deg,
+      rgba(85, 85, 85, 0.05) 0%,
+      rgba(85, 85, 85, 0.05) 25%,
+      rgba(11, 11, 11, 0.05) 25%,
+      rgba(11, 11, 11, 0.05) 50%,
+      rgba(182, 182, 182, 0.05) 50%,
+      rgba(182, 182, 182, 0.05) 75%,
+      rgba(28, 28, 28, 0.05) 75%,
+      rgba(28, 28, 28, 0.05) 100%
+    ),
+    linear-gradient(
+      232deg,
+      rgba(145, 145, 145, 0.05) 0%,
+      rgba(145, 145, 145, 0.05) 25%,
+      rgba(165, 165, 165, 0.05) 25%,
+      rgba(165, 165, 165, 0.05) 50%,
+      rgba(84, 84, 84, 0.05) 50%,
+      rgba(84, 84, 84, 0.05) 75%,
+      rgba(131, 131, 131, 0.05) 75%,
+      rgba(131, 131, 131, 0.05) 100%
+    ),
+    linear-gradient(
+      321deg,
+      rgba(254, 254, 254, 0.05) 0%,
+      rgba(254, 254, 254, 0.05) 25%,
+      rgba(249, 249, 249, 0.05) 25%,
+      rgba(249, 249, 249, 0.05) 50%,
+      rgba(0, 0, 0, 0.05) 50%,
+      rgba(0, 0, 0, 0.05) 75%,
+      rgba(104, 104, 104, 0.05) 75%,
+      rgba(104, 104, 104, 0.05) 100%
+    ),
+    linear-gradient(90deg, rgb(21, 8, 116), rgb(111, 197, 250));
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   color: hsl(240, 76%, 87%);
 }
@@ -25,8 +60,8 @@ body {
   padding: 20px;
   border-radius: 15px;
 
-  background-color: hsl(240, 38%, 13%);
-  border: 2.5px solid hsl(237, 22%, 34%);
+  background-color: hsla(240, 75%, 13%, 75%);
+  backdrop-filter: blur(6px);
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
 }
 
@@ -69,14 +104,16 @@ body {
 
 h1 {
   text-align: left;
-  margin-left: 1em;
+  margin-left: 5px;
+  margin-top: 0px;
   margin-bottom: 20px;
+  background-clip: text;
   background: linear-gradient(
     to right,
-    hsl(280, 80%, 58%) -10%,
-    hsl(210, 100%, 55%) 60%
+    hsl(193, 100%, 62%) 0%,
+    hsl(240, 70%, 62%) 30%
   );
-  background-clip: text;
+  -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
@@ -105,7 +142,9 @@ h1 {
   padding: 10px;
   border-radius: 5px;
   overflow-wrap: break-word;
+  overflow-x: auto;
 }
+
 
 .user-message {
   background-color: hsl(240, 55%, 55%);
