@@ -102,7 +102,7 @@ body {
   box-shadow: inset 0px 0px 16px 2px hsla(245, 90%, 15%, 0.28);
 }
 
-h1 {
+.heading {
   text-align: left;
   margin-left: 5px;
   margin-top: 0px;
