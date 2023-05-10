@@ -1,9 +1,22 @@
 html {
+  /* Firefox - Hides track and changes thumb color */
   scrollbar-color: hsla(0, 0%, 46%, 0.5) transparent;
 }
 
+/* Chrome - Hides track and width/height set for vertical/horizontal scrollbars */
 ::-webkit-scrollbar {
-  display: none;
+  background-color: transparent;
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: hsla(0, 0%, 50%, 0.5);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: hsla(0, 0%, 50%, 0.7);
 }
 
 body {
@@ -148,7 +161,6 @@ body {
   overflow-wrap: break-word;
   overflow-x: auto;
 }
-
 
 .user-message {
   background-color: hsl(240, 55%, 55%);
