@@ -1,9 +1,7 @@
 html {
-  /* Firefox - Hides track and changes thumb color */
   scrollbar-color: hsla(0, 0%, 46%, 0.5) transparent;
 }
 
-/* Chrome - Hides track and width/height set for vertical/horizontal scrollbars */
 ::-webkit-scrollbar {
   background-color: transparent;
   width: 8px;
