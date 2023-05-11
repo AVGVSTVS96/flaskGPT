@@ -25,42 +25,27 @@ body {
   margin: 0;
 
   /* background-color: hsl(240, 45%, 9%); */
-  background-position: 0% 0%;
-  background-size: 7vmin 7vmin;
-  background: linear-gradient(
-      149deg,
-      rgba(85, 85, 85, 0.05) 0%,
-      rgba(85, 85, 85, 0.05) 25%,
-      rgba(11, 11, 11, 0.05) 25%,
-      rgba(11, 11, 11, 0.05) 50%,
-      rgba(182, 182, 182, 0.05) 50%,
-      rgba(182, 182, 182, 0.05) 75%,
-      rgba(28, 28, 28, 0.05) 75%,
-      rgba(28, 28, 28, 0.05) 100%
+  background-image: 
+    /* radial-gradient(
+      circle at center center,
+      transparent 30%,
+      rgb(34, 34, 34) 99%
+    ), */
+    repeating-linear-gradient(
+      0deg,
+      rgba(63, 63, 63, 0.2) 0px,
+      rgba(63, 63, 63, 0.2) 1px,
+      transparent 1px,
+      transparent 38px  /* Control Grid Size */
     ),
-    linear-gradient(
-      232deg,
-      rgba(145, 145, 145, 0.05) 0%,
-      rgba(145, 145, 145, 0.05) 25%,
-      rgba(165, 165, 165, 0.05) 25%,
-      rgba(165, 165, 165, 0.05) 50%,
-      rgba(84, 84, 84, 0.05) 50%,
-      rgba(84, 84, 84, 0.05) 75%,
-      rgba(131, 131, 131, 0.05) 75%,
-      rgba(131, 131, 131, 0.05) 100%
+    repeating-linear-gradient(
+      90deg,
+      rgba(63, 63, 63, 0.2) 0px,
+      rgba(63, 63, 63, 0.2) 1px,
+      transparent 1px,
+      transparent 38px  /* Control Grid Size */
     ),
-    linear-gradient(
-      321deg,
-      rgba(254, 254, 254, 0.05) 0%,
-      rgba(254, 254, 254, 0.05) 25%,
-      rgba(249, 249, 249, 0.05) 25%,
-      rgba(249, 249, 249, 0.05) 50%,
-      rgba(0, 0, 0, 0.05) 50%,
-      rgba(0, 0, 0, 0.05) 75%,
-      rgba(104, 104, 104, 0.05) 75%,
-      rgba(104, 104, 104, 0.05) 100%
-    ),
-    linear-gradient(90deg, rgb(21, 8, 116), rgb(111, 197, 250));
+    linear-gradient(90deg, hsl(240, 17%, 2%), hsl(235, 50%, 9%));
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   color: hsl(240, 76%, 87%);
 }
@@ -75,8 +60,9 @@ body {
   padding: 20px;
   border-radius: 10px;
 
-  background-color: hsla(240, 75%, 13%, 60%);
-  backdrop-filter: blur(6px);
+  background-color: hsla(235, 30%, 8%, 0.6);
+  backdrop-filter: blur(1px);
+  border: 0.25px solid hsla(235, 30%, 20%, 0.40);
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
 }
 
@@ -108,13 +94,14 @@ body {
   margin-left: 5px;
   padding: 10px;
   border: 0px;
-  background-color: hsl(240, 39%, 80%);
-  color: hsl(240, 25%, 25%);
+  background-color: hsl(235, 20%, 15%);
+  color: hsl(240, 25%, 75%);
+  transition: box-shadow 0.14s ease-in, background-color 0.14s ease-in;
 }
 
 .input:focus {
   outline: none;
-  box-shadow: inset 0px 0px 16px 2px hsla(245, 90%, 15%, 0.28);
+  box-shadow: inset 0px 0px 16px 2px hsla(235, 90%, 10%, 0.28);
 }
 
 .heading {
@@ -123,18 +110,14 @@ body {
   margin-top: 0px;
   margin-bottom: 20px;
   background-clip: text;
-  background: linear-gradient(
-    to right,
-    hsl(193, 100%, 62%) 0%,
-    hsl(240, 70%, 62%) 30%
-  );
+  background: hsl(235, 55%, 80%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
 .button {
-  background-color: hsl(240, 55%, 55%);
-  color: hsl(240, 76%, 90%);
+  background-color: hsl(235, 60%, 55%);
+  color: hsl(235, 75%, 85%);
 
   border: none;
   border-radius: 5px;
@@ -147,7 +130,7 @@ body {
 
 .button:hover {
   transform: scale(1.03);
-  background-color: hsl(240, 50%, 55%);
+  background-color: hsl(235, 60%, 52%);
 }
 
 .message {
@@ -162,14 +145,14 @@ body {
 }
 
 .user-message {
-  background-color: hsl(240, 55%, 55%);
+  background-color: hsl(235, 60%, 55%);
   color: hsl(240, 76%, 90%);
   float: right;
   clear: both;
 }
 
 .assistant-message {
-  background-color: hsl(240, 40%, 80%);
+  background-color: hsl(235, 25%, 65%);
   color: hsl(240, 30%, 25%);
   float: left;
   clear: both;
