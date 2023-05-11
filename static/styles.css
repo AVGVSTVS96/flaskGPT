@@ -9,12 +9,12 @@ html {
 }
 
 ::-webkit-scrollbar-thumb {
-  background-color: hsla(0, 0%, 50%, 0.5);
+  background-color: hsla(0, 0%, 40%, 0.5);
   border-radius: 10px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background-color: hsla(0, 0%, 50%, 0.7);
+  background-color: hsla(0, 0%, 35%, 0.7);
 }
 
 body {
@@ -116,7 +116,7 @@ body {
 }
 
 .button {
-  background-color: hsl(235, 60%, 55%);
+  background-color: hsl(235, 55%, 45%);
   color: hsl(235, 75%, 85%);
 
   border: none;
@@ -125,12 +125,11 @@ body {
   margin-left: 10px;
   margin-right: 5px;
   cursor: pointer;
-  transition: transform ease-out 0.2s, background-color 0.16s ease-in;
+  transition: background-color 0.16s ease-in;
 }
 
 .button:hover {
-  transform: scale(1.03);
-  background-color: hsl(235, 60%, 52%);
+  background-color: hsl(235, 50%, 35%);
 }
 
 .message {
@@ -145,14 +144,14 @@ body {
 }
 
 .user-message {
-  background-color: hsl(235, 60%, 55%);
+  background-color: hsl(235, 55%, 45%);
   color: hsl(240, 76%, 90%);
   float: right;
   clear: both;
 }
 
 .assistant-message {
-  background-color: hsl(235, 25%, 65%);
+  background-color: hsl(235, 23%, 65%);
   color: hsl(240, 30%, 25%);
   float: left;
   clear: both;
