@@ -1,5 +1,5 @@
 let messages = [];
-let autoScroll = true;
+let autoScrollState = true;
 
 const chatMessagesDiv = document.getElementById("chat-messages");
 const userInputElem = document.getElementById("user-input");
@@ -9,7 +9,7 @@ window.renderMarkdown = function (content) {
   return md.render(content);
 };
 
-function addMessageToResultDiv(role, content) {
+function addMessageToDiv(role, content) {
   let messageDiv = document.createElement("div");
   messageDiv.className =
     role === "user" ? "message user-message" : "message assistant-message";
@@ -18,11 +18,11 @@ function addMessageToResultDiv(role, content) {
   messageDiv.innerHTML = renderedContent;
 
   chatMessagesDiv.appendChild(messageDiv);
-  scrollToBottom();
+  autoScroll();
 }
 
-function scrollToBottom() {
-  if (autoScroll) {
+function autoScroll() {
+  if (autoScrollState) {
     chatMessagesDiv.scrollTop = chatMessagesDiv.scrollHeight;
   }
 }
@@ -33,7 +33,7 @@ chatMessagesDiv.addEventListener("scroll", function () {
     chatMessagesDiv.scrollHeight - chatMessagesDiv.clientHeight <=
     chatMessagesDiv.scrollTop + 1;
 
-  autoScroll = isAtBottom;
+  autoScrollState = isAtBottom;
 });
 
 async function handleResponse(response, messageText) {
@@ -54,7 +54,7 @@ async function handleResponse(response, messageText) {
     const text = decoder.decode(value);
     assistantMessage += text;
     messageText.innerHTML = window.renderMarkdown(assistantMessage).trim(); // Render the markdown content as HTML using 'markdown-it' library while streaming
-    scrollToBottom();
+    autoScroll();
   }
 }
 
@@ -67,14 +67,14 @@ window.onload = function () {
       let userInput = userInputElem.value;
 
       messages.push({ role: "user", content: userInput });
-      addMessageToResultDiv("user", userInput, "user-input");
+      addMessageToDiv("user", userInput, "user-input");
 
       let messageDiv = document.createElement("div");
       messageDiv.className = "message assistant-message";
       let messageText = document.createElement("p");
       messageDiv.appendChild(messageText);
       chatMessagesDiv.appendChild(messageDiv);
-      scrollToBottom();
+      autoScroll();
 
       const response = await fetch("/gpt4", {
         method: "POST",
