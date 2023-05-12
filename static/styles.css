@@ -96,12 +96,12 @@ body {
   border: 0px;
   background-color: hsl(235, 20%, 15%);
   color: hsl(240, 25%, 75%);
-  transition: box-shadow 0.14s ease-in, background-color 0.14s ease-in;
+  transition: box-shadow 0.2s ease-in-out;
 }
 
 .input:focus {
   outline: none;
-  box-shadow: inset 0px 0px 16px 2px hsla(235, 90%, 10%, 0.28);
+  box-shadow: inset 0px 0px 12px 0px hsla(235, 20%, 10%, 0.98);
 }
 
 .heading {
