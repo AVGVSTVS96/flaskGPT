@@ -30,7 +30,7 @@ body {
       circle at center center,
       transparent 30%,
       rgb(34, 34, 34) 99%
-    ), */
+    ), */ 
     repeating-linear-gradient(
       0deg,
       rgba(63, 63, 63, 0.2) 0px,
@@ -62,7 +62,7 @@ body {
 
   background-color: hsla(235, 30%, 8%, 0.6);
   backdrop-filter: blur(1px);
-  border: 0.25px solid hsla(235, 30%, 20%, 0.40);
+  border: 0.25px solid hsla(235, 30%, 20%, 0.4);
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
 }
 
@@ -141,6 +141,10 @@ body {
   overflow-wrap: break-word;
   overflow-x: auto;
   white-space: pre-wrap;
+}
+
+.message li {
+  white-space: normal;
 }
 
 .user-message {

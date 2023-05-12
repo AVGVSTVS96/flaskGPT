@@ -9,9 +9,11 @@ load_dotenv()
 app = Flask(__name__)
 openai.api_key = os.getenv("OPENAI_API_KEY")
 
+
 @app.route('/')
 def index():
     return render_template('index.html')
+
 
 def generate(messages):
     def stream():
@@ -32,6 +34,7 @@ def generate(messages):
 
     return stream()
 
+
 @app.route('/gpt4', methods=['POST'])
 def gpt4():
     data = request.get_json()
@@ -39,10 +42,11 @@ def gpt4():
     messages = data.get('messages', [])
 
     messages = [{"role": "system",
-                 "content": "respond to all prompts in the character of sarcastic, witty knight from the 1500s who's roasts anyone who speaks with him"}] + messages
+                 "content": "respond to all prompts in the character of a senior programming expert who has experience building web applications with various frameworks and releasing and maintainging open source projects"}] + messages
 
     assistant_response = generate(messages)
     return Response(assistant_response, mimetype='text/event-stream')
+
 
 if __name__ == '__main__':
     app.run(debug=True)
