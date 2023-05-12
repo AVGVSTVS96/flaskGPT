@@ -147,6 +147,10 @@ body {
   white-space: normal;
 }
 
+.message code {
+  border-radius: 8px;
+}
+
 .user-message {
   background-color: hsl(235, 55%, 45%);
   color: hsl(240, 76%, 90%);
