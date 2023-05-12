@@ -54,6 +54,10 @@ async function handleResponse(response, messageText) {
     const text = decoder.decode(value);
     assistantMessage += text;
     messageText.innerHTML = window.renderMarkdown(assistantMessage).trim(); // Render the markdown content as HTML using 'markdown-it' library while streaming
+    const codeElements = messageText.querySelectorAll("pre code");
+    codeElements.forEach((codeElement) => {
+      hljs.highlightElement(codeElement);
+    });
     autoScroll();
   }
 }

@@ -4,11 +4,12 @@ flaskGPT a customizable, open source GPT-3.5/4 chat app built with Flask and Ope
 
 
 ## Features
-- Full conversation history functionality
-- Chat with the GPT-3.5 & GPT-4 models
-- Real-time response streaming functionality
-- Markdown support in user and assistant messages
-- Automatic scrolling, can be cancelled by scrolling up 
+- 📝 Full conversation history functionality
+- 🤖 Chat with the GPT-3.5 & GPT-4 models
+- 💬 Real-time response character streaming functionality
+- 🧩 Markdown support in both user and assistant messages
+- 🎨 Syntax highligting for code blocks with automatic language detection
+- ⚙️ Automatic scrolling with new messages, cancellable by scrolling up 
 
 # **Tasks**
 ## **Enhancements**
@@ -20,11 +21,3 @@ flaskGPT a customizable, open source GPT-3.5/4 chat app built with Flask and Ope
 - [ ] Add ability for users to edit previous messages
 - [ ] Add ability for users to edit system message from UI
 - [ ] Add the ability to switch between GPT-3.5 and GPT-4
-
-## **Completed**
-- [x] Correctly implement character streaming functionality
-- [x] Add Markdown support
-- [x] Add system role to steer AI behavior 
-- [x] Separate HTML, CSS and JS into their own files
-- [x] Style the UI with CSS
-- [x] Move chat input to the bottom of the chatbox
