@@ -26,11 +26,11 @@ body {
 
   /* background-color: hsl(240, 45%, 9%); */
   background-image: 
-    /* radial-gradient(
+     radial-gradient(
       circle at center center,
-      transparent 30%,
-      rgb(34, 34, 34) 99%
-    ), */ 
+      transparent 50%,
+      rgb(0, 0, 0) 180%
+    ),
     repeating-linear-gradient(
       0deg,
       rgba(63, 63, 63, 0.2) 0px,
