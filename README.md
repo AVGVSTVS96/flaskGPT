@@ -13,11 +13,6 @@ flaskGPT a customizable, open source GPT-3.5/4 chat app built with Flask and Ope
 
 # **Tasks**
 ## **Enhancements**
-- [ ] Hide scrollbars in Chrome
-- [ ] Update chatbox height limits to stop second scrollbar
-- [ ] Add syntax highlighting to Markdown code blocks
-- [ ] Add CSS styling for Markdown code blocks
-- [ ] Add line wrap to user-input box so it expands with text
-- [ ] Add ability for users to edit previous messages
-- [ ] Add ability for users to edit system message from UI
-- [ ] Add the ability to switch between GPT-3.5 and GPT-4
+- Add ability for users to edit previous messages
+- Add ability for users to edit system message from UI
+- Add the ability to switch between GPT-3.5 and GPT-4
