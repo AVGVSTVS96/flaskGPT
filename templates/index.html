@@ -4,10 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GPT-4 API Chat</title>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <link rel="stylesheet" href="/static/styles.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/tokyo-night-dark.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+    <script defer src="/static/main.js"></script>
   </head>
   <body>
     <div class="chat-container">
@@ -16,16 +14,17 @@
         <div id="chat-messages" class="chat-box"></div>
         <form id="chat-form" class="input-form">
           <textarea
-            type="text"
-            class="input"
-            id="user-input"
-            name="user_input" 
-            placeholder="Type your message..."></textarea>
+          type="text"
+          class="input"
+          id="user-input"
+          name="user_input"
+          placeholder="Type your message..."></textarea>
           <button class="button" type="submit" id="submitBtn">Send</button>
         </form>
       </div>
     </div>
-    <script src="/static/main.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/markdown-it/dist/markdown-it.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/markdown-it/dist/markdown-it.min.js"></script>
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/tokyo-night-dark.min.css">
   </body>
 </html>
