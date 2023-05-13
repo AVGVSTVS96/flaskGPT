@@ -2,6 +2,7 @@
 
 flaskGPT a customizable, open source GPT-3.5/4 chat app built with Flask and OpenAI's API. It implements several features essential to providing an excellent user experience, with a simple frontend UI built with HTML, CSS, and JavaScript
 
+<img width="939" alt="Screenshot of App" src="https://github.com/AVGVSTVS96/flaskGPT/assets/122117267/a977018a-10d5-4c5c-9211-b5fbe1b15c01">
 
 ## Features
 - 📝 Full conversation history functionality
