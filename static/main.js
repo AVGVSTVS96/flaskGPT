@@ -9,6 +9,11 @@ window.renderMarkdown = function (content) {
   return md.render(content);
 };
 
+document.querySelector(".settings-toggle").addEventListener("click", function () {
+  const dropdown = document.querySelector(".settings-dropdown");
+  dropdown.style.display = dropdown.style.display === "block" ? "none" : "block";
+});
+
 document
   .getElementById("user-input")
   .addEventListener("keydown", function (event) {
@@ -82,7 +87,9 @@ window.onload = function () {
       event.preventDefault();
 
       let userInput = userInputElem.value.trim();
-
+      let systemMessage = document.getElementById("system-message").value.trim();
+      let modelType = document.getElementById("model-type").value;
+      
       messages.push({ role: "user", content: userInput });
       addMessageToDiv("user", userInput, "user-input");
 
@@ -98,6 +105,8 @@ window.onload = function () {
         body: JSON.stringify({
           user_input: userInput,
           messages: messages,
+          system_message: systemMessage, 
+          model_type: modelType,  
         }),
         headers: {
           "Content-Type": "application/json",

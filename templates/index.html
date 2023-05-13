@@ -8,6 +8,17 @@
     <script defer src="/static/main.js"></script>
   </head>
   <body>
+    <div class="menubar">
+      <button class="settings-toggle">Settings</button>
+      <div class="settings-dropdown">
+        <input type="text" class="input" id="system-message" placeholder="Enter system message">
+        <select id="model-type" class="input">
+          <option value="gpt-3.5-turbo">GPT-3.5-Turbo</option>
+          <option value="gpt-4">GPT-4</option>
+        </select>
+      </div>
+    </div>
+      
     <div class="chat-container">
       <h1 class="heading">Canvas GPT</h1>
       <div class="chat-wrapper">

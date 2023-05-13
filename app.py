@@ -15,11 +15,11 @@ def index():
     return render_template('index.html')
 
 
-def generate(messages):
+def generate(messages, model_type):
     def stream():
         try:
             response = openai.ChatCompletion.create(
-                model="gpt-3.5-turbo",
+                model=model_type,
                 messages=messages,
                 stream=True
             )
@@ -40,11 +40,11 @@ def gpt4():
     data = request.get_json()
     user_input = data.get('user_input')
     messages = data.get('messages', [])
+    system_message = data.get('system_message')
+    model_type = data.get('model_type', "gpt-3.5-turbo")
 
-    messages = [{"role": "system",
-                 "content": "respond to all prompts in the character of a senior programming expert who has experience building web applications with various frameworks and releasing and maintainging open source projects"}] + messages
-
-    assistant_response = generate(messages)
+    messages = [{"role": "system", "content": system_message}] + messages
+    assistant_response = generate(messages, model_type)
     return Response(assistant_response, mimetype='text/event-stream')
 
 
