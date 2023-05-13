@@ -9,6 +9,15 @@ window.renderMarkdown = function (content) {
   return md.render(content);
 };
 
+document
+  .getElementById("user-input")
+  .addEventListener("keydown", function (event) {
+    if (event.key === "Enter" && !event.shiftKey) {
+      event.preventDefault();
+      document.getElementById("submitBtn").click();
+    }
+  });
+
 function addMessageToDiv(role, content) {
   let messageDiv = document.createElement("div");
   messageDiv.className =
@@ -18,6 +27,10 @@ function addMessageToDiv(role, content) {
   messageDiv.innerHTML = renderedContent;
 
   chatMessagesDiv.appendChild(messageDiv);
+  const codeElements = messageDiv.querySelectorAll("pre code");
+  codeElements.forEach((codeElement) => {
+    hljs.highlightElement(codeElement);
+  });
   autoScroll();
 }
 
@@ -68,7 +81,7 @@ window.onload = function () {
     .addEventListener("submit", async function (event) {
       event.preventDefault();
 
-      let userInput = userInputElem.value;
+      let userInput = userInputElem.value.trim();
 
       messages.push({ role: "user", content: userInput });
       addMessageToDiv("user", userInput, "user-input");
