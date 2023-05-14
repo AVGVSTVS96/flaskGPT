@@ -9,9 +9,22 @@ window.renderMarkdown = function (content) {
   return md.render(content);
 };
 
-document.querySelector(".settings-toggle").addEventListener("click", function () {
-  const dropdown = document.querySelector(".settings-dropdown");
-  dropdown.style.display = dropdown.style.display === "block" ? "none" : "block";
+const settingsButton = document.getElementById('settings-toggle');
+const settingsDropdown = document.querySelector('.settings-dropdown');
+
+function toggleDropdownDisplay() {
+  settingsDropdown.style.display = settingsDropdown.style.display === 'block' ? 'none' : 'block';
+}
+
+document.addEventListener('click', (event) => {
+  const clickInsideDropdown = settingsDropdown.contains(event.target);
+  const clickOnSettingsButton = settingsButton.contains(event.target);
+  
+  if (!clickInsideDropdown && !clickOnSettingsButton) {
+    settingsDropdown.style.display = 'none';
+  } else if (clickOnSettingsButton) {
+    toggleDropdownDisplay();
+  }
 });
 
 document
