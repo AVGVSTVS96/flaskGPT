@@ -12,10 +12,14 @@
       <button class="settings-toggle" id="settings-toggle">Settings</button>
       <div class="settings-dropdown">
         <input type="text" class="input" id="system-message" placeholder="Enter system message">
-        <select id="model-type" class="input">
-          <option value="gpt-3.5-turbo">GPT-3.5-Turbo</option>
-          <option value="gpt-4">GPT-4</option>
-        </select>
+        <div class="model-toggle-container">
+          <label class="switch">
+            <input type="checkbox" id="model-toggle" autocomplete="off">
+            <span class="slider">
+              <span id="model-label">GPT-3.5</span>
+            </span>
+          </label>
+        </div>        
       </div>
     </div>
       
