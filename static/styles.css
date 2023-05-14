@@ -233,3 +233,65 @@ body {
 .settings-dropdown > *:last-child {
   margin-bottom: 0;
 }
+
+.model-toggle-container {
+  display: flex;
+  align-items: center;
+}
+
+.switch {
+  font-size: 17px;
+  position: relative;
+  display: inline-block;
+  width: 5em;
+  height: 2em;
+  margin-left: 15px;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: hsl(240, 20%, 20%);
+  box-shadow: inset 2px 5px 10px rgba(0,0,0,0.3);
+  transition: .4s;
+  border-radius: 5px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 1.4em;
+  width: 0.1em;
+  border-radius: 0px;
+  left: 0.3em;
+  bottom: 0.3em;
+  background-color: white;
+  transition: .4s;
+}
+
+input:checked + .slider {
+  background-color: hsl(240, 10%, 15%);
+  box-shadow: inset 2px 5px 10px rgba(0, 0, 0,0.3);
+}
+
+input:checked + .slider:before {
+  transform: translateX(4.25em) rotate(360deg); /* slider animation length, may not be perfect */
+}
+
+#model-label {
+  color: hsl(240, 76%, 87%);
+}
