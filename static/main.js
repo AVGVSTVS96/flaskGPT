@@ -12,6 +12,17 @@ window.renderMarkdown = function (content) {
 const settingsButton = document.getElementById('settings-toggle');
 const settingsDropdown = document.querySelector('.settings-dropdown');
 
+const modelToggle = document.getElementById("model-toggle");
+const modelLabel = document.getElementById("model-label");
+
+modelToggle.addEventListener("change", function () {
+  if (modelToggle.checked) {
+    modelLabel.textContent = "GPT-4";
+  } else {
+    modelLabel.textContent = "GPT-3.5";
+  }
+});
+
 function toggleDropdownDisplay() {
   settingsDropdown.style.display = settingsDropdown.style.display === 'block' ? 'none' : 'block';
 }
