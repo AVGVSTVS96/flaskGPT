@@ -1,5 +1,6 @@
 let messages = [];
 let autoScrollState = true;
+let modelName;
 
 const chatMessagesDiv = document.getElementById("chat-messages");
 const userInputElem = document.getElementById("user-input");
@@ -18,8 +19,10 @@ const modelLabel = document.getElementById("model-label");
 modelToggle.addEventListener("change", function () {
   if (modelToggle.checked) {
     modelLabel.textContent = "GPT-4";
+    modelName = "gpt-4"
   } else {
     modelLabel.textContent = "GPT-3.5";
+    modelName = "gpt-3.5-turbo"; // TODO test
   }
 });
 
@@ -112,7 +115,7 @@ window.onload = function () {
 
       let userInput = userInputElem.value.trim();
       let systemMessage = document.getElementById("system-message").value.trim();
-      let modelType = document.getElementById("model-label").value;
+      let modelType = modelName;
       
       messages.push({ role: "user", content: userInput });
       addMessageToDiv("user", userInput, "user-input");
