@@ -38,14 +38,12 @@ def generate(messages, model_type):
 @app.route('/gpt4', methods=['POST'])
 def gpt4():
     data = request.get_json()
-    user_input = data.get('user_input')
     messages = data.get('messages', [])
-    system_message = data.get('system_message')
-    model_type = data.get('model_type', "gpt-3.5-turbo")
+    model_type = data.get('model_type')
 
-    messages = [{"role": "system", "content": system_message}] + messages
     assistant_response = generate(messages, model_type)
     return Response(assistant_response, mimetype='text/event-stream')
+
 
 
 if __name__ == '__main__':

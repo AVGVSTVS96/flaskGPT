@@ -1,6 +1,5 @@
 let messages = [];
 let autoScrollState = true;
-let modelName;
 
 const chatMessagesDiv = document.getElementById("chat-messages");
 const userInputElem = document.getElementById("user-input");
@@ -15,6 +14,7 @@ const settingsDropdown = document.querySelector('.settings-dropdown');
 
 const modelToggle = document.getElementById("model-toggle");
 const modelLabel = document.getElementById("model-label");
+let modelName = modelToggle.checked ? "gpt-4" : "gpt-3.5-turbo";
 
 modelToggle.addEventListener("change", function () {
   if (modelToggle.checked) {
@@ -22,7 +22,7 @@ modelToggle.addEventListener("change", function () {
     modelName = "gpt-4"
   } else {
     modelLabel.textContent = "GPT-3.5";
-    modelName = "gpt-3.5-turbo"; // TODO test
+    modelName = "gpt-3.5-turbo"; 
   }
 });
 
@@ -116,8 +116,12 @@ window.onload = function () {
       let userInput = userInputElem.value.trim();
       let systemMessage = document.getElementById("system-message").value.trim();
       let modelType = modelName;
-      
-      messages.push({ role: "user", content: userInput });
+
+      if (messages.length === 0 && systemMessage) {
+        messages.push({ role: "system", "content": systemMessage });
+      }
+
+      messages.push({ role: "user", "content": userInput });
       addMessageToDiv("user", userInput, "user-input");
 
       let messageDiv = document.createElement("div");
@@ -128,17 +132,16 @@ window.onload = function () {
       autoScroll();
 
       const response = await fetch("/gpt4", {
-        method: "POST",
-        body: JSON.stringify({
-          user_input: userInput,
-          messages: messages,
-          system_message: systemMessage, 
-          model_type: modelType,  
-        }),
-        headers: {
-          "Content-Type": "application/json",
-        },
+          method: "POST",
+          body: JSON.stringify({
+            messages: messages,
+            model_type: modelType,  
+          }),
+          headers: {
+            "Content-Type": "application/json",
+          },
       });
+
 
       handleResponse(response, messageText);
 
