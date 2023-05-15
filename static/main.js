@@ -112,7 +112,7 @@ window.onload = function () {
 
       let userInput = userInputElem.value.trim();
       let systemMessage = document.getElementById("system-message").value.trim();
-      let modelType = document.getElementById("model-type").value;
+      let modelType = document.getElementById("model-label").value;
       
       messages.push({ role: "user", content: userInput });
       addMessageToDiv("user", userInput, "user-input");
