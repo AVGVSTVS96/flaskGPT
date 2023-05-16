@@ -1,13 +1,5 @@
-let messages = [];
-let autoScrollState = true;
-
 const chatMessagesDiv = document.getElementById("chat-messages");
 const userInputElem = document.getElementById("user-input");
-
-window.renderMarkdown = function (content) {
-  const md = new markdownit();
-  return md.render(content);
-};
 
 const settingsButton = document.getElementById('settings-toggle');
 const settingsDropdown = document.querySelector('.settings-dropdown');
@@ -15,6 +7,8 @@ const settingsDropdown = document.querySelector('.settings-dropdown');
 const modelToggle = document.getElementById("model-toggle");
 const modelLabel = document.getElementById("model-label");
 let modelName = modelToggle.checked ? "gpt-4" : "gpt-3.5-turbo";
+let messages = [];
+let autoScrollState = true;
 
 modelToggle.addEventListener("change", function () {
   if (modelToggle.checked) {
@@ -42,13 +36,18 @@ document.addEventListener('click', (event) => {
 });
 
 document
-  .getElementById("user-input")
-  .addEventListener("keydown", function (event) {
-    if (event.key === "Enter" && !event.shiftKey) {
-      event.preventDefault();
-      document.getElementById("submitBtn").click();
-    }
-  });
+.getElementById("user-input")
+.addEventListener("keydown", function (event) {
+  if (event.key === "Enter" && !event.shiftKey) {
+    event.preventDefault();
+    document.getElementById("submitBtn").click();
+  }
+});
+
+window.renderMarkdown = function (content) {
+  const md = new markdownit();
+  return md.render(content);
+};
 
 function addMessageToDiv(role, content) {
   let messageDiv = document.createElement("div");
@@ -98,7 +97,7 @@ async function handleResponse(response, messageText) {
 
     const text = decoder.decode(value);
     assistantMessage += text;
-    messageText.innerHTML = window.renderMarkdown(assistantMessage).trim(); // Render the markdown content as HTML using 'markdown-it' library while streaming
+    messageText.innerHTML = window.renderMarkdown(assistantMessage).trim(); 
     const codeElements = messageText.querySelectorAll("pre code");
     codeElements.forEach((codeElement) => {
       hljs.highlightElement(codeElement);
@@ -115,7 +114,7 @@ window.onload = function () {
 
       let userInput = userInputElem.value.trim();
       let systemMessage = document.getElementById("system-message").value.trim();
-      let modelType = modelName;
+      let modelType = modelName; // may not be needed, use modelName explicitly
 
       if (messages.length === 0 && systemMessage) {
         messages.push({ role: "system", "content": systemMessage });
@@ -124,6 +123,7 @@ window.onload = function () {
       messages.push({ role: "user", "content": userInput });
       addMessageToDiv("user", userInput, "user-input");
 
+      // FIXME: handle this in addMessageToDiv function
       let messageDiv = document.createElement("div");
       messageDiv.className = "message assistant-message";
       let messageText = document.createElement("p");
@@ -145,6 +145,7 @@ window.onload = function () {
 
       handleResponse(response, messageText);
 
+      // FIXME: Move this to happen after user input is sent, not after assitant message is received
       userInputElem.value = "";
     });
 };
