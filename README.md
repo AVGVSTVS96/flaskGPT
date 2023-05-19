@@ -12,3 +12,8 @@ flaskGPT a customizable, open source GPT-3.5/4 chat app built with Flask and Ope
 - 🧩 Markdown support in both user and assistant messages
 - 🎨 Syntax highligting for code blocks with automatic language detection
 - ⚙️ Automatic scrolling with new messages, cancellable by scrolling up 
+
+---
+
+### Created a FastAPI version of this app [FastGPT](https://github.com/AVGVSTVS96/FastGPT)
+The FastAPI version calls the OpenAI API asynchronously using OpenAI's native asynchronous support.
