@@ -78,8 +78,6 @@ body {
   min-height: 100px;
   margin-bottom: 20px;
   overflow-y: auto;
-  padding-right: 10px;
-  max-width: calc(100% - 10px);
 }
 
 .input-form {
