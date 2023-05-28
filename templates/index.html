@@ -6,24 +6,21 @@
     <title>GPT-4 API Chat</title>
     <link rel="stylesheet" href="/static/styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/tokyo-night-dark.min.css">
-    <script defer src="/static/main.js"></script>
+    <script defer src="/static/interface.js"></script>
+    <script defer src="/static/chat.js"></script>
   </head>
   <body>
     <div class="menubar">
-      <button class="settings-toggle" id="settings-toggle">Settings</button>
-      <div class="settings-dropdown">
-        <input type="text" class="input" id="system-message" placeholder="Enter system message">
-        <div class="model-toggle-container">
-          <label class="switch">
-            <input type="checkbox" id="model-toggle" autocomplete="off">
-            <span class="slider">
-              <span id="model-label">GPT-3.5</span>
-            </span>
-          </label>
-        </div>        
-      </div>
+      <input type="text" class="input" id="system-message" placeholder="Enter system message">
+      <label class="slider-container">
+        <input type="checkbox" id="model-toggle" autocomplete="off">
+        <span class="slider-track">
+          <span class="model-label" id="model-label-left">GPT-3.5</span>
+          <div class="slider"></div>
+          <span class="model-label" id="model-label-right">GPT-4</span>
+        </span>
+      </label> 
     </div>
-      
     <div class="chat-container">
       <h1 class="heading">Canvas GPT</h1>
       <div class="chat-wrapper">
