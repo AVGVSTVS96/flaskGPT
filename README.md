@@ -15,5 +15,5 @@ flaskGPT a customizable, open source GPT-3.5/4 chat app built with Flask and Ope
 
 ---
 
-### Created a FastAPI version of this app [FastGPT](https://github.com/AVGVSTVS96/FastGPT)
+### Created a [FastAPI version](https://github.com/AVGVSTVS96/FastGPT) of this app
 The FastAPI version calls the OpenAI API asynchronously using OpenAI's native asynchronous support.
